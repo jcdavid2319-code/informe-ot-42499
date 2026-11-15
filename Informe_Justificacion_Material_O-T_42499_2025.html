@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Justificación Material O/T 42499</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .download-panel {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 3px solid #1e8449;
+        }
+
+        .download-panel h3 {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            color: #27ae60;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: #ecf0f1;
+        }
+
+        .download-btn.word {
+            background: #3498db;
+            color: white;
+        }
+
+        .download-btn.word:hover {
+            background: #2980b9;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin: 5px 0;
+        }
+
+        .metadata {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .metadata-item {
+            font-size: 0.9em;
+        }
+
+        .metadata-item strong {
+            display: block;
+            opacity: 0.8;
+            font-size: 0.85em;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #34495e;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            text-align: justify;
+            color: #555;
+        }
+
+        .highlight {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .highlight strong {
+            color: #2c3e50;
+        }
+
+        .summary-box {
+            background: white;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #3498db;
+        }
+
+        .summary-item {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+
+        .summary-item-label {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        .summary-item-value {
+            color: #555;
+            margin: 0;
+            font-size: 1.05em;
+        }
+
+        .summary-item.warning {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+
+        .summary-item.success {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .summary-item.success .summary-item-value {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        table th {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        table tr:hover {
+            background-color: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .total-row {
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4e8f0 100%);
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .checklist li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #555;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .recommendation {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .recommendation strong {
+            color: #ff6b00;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-top: 3px solid #3498db;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            table th, table td {
+                padding: 10px;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+            }
+
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .download-panel {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="download-panel">
+            <h3>📥 DESCARGAS DISPONIBLES</h3>
+            <div class="download-buttons">
+                <button class="download-btn" onclick="descargarHTML()">
+                    🌐 Descargar HTML
+                </button>
+                <button class="download-btn word" onclick="descargarWord()">
+                    📄 Descargar Word
+                </button>
+                <button class="download-btn" onclick="window.print()">
+                    🖨️ Imprimir / PDF
+                </button>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1>📋 INFORME DE JUSTIFICACIÓN</h1>
+            <p>No Utilización del Material Egresado en 2024</p>
+            <div class="metadata">
+                <div class="metadata-item">
+                    <strong>Referencia O/T</strong>
+                    42499
+                </div>
+                <div class="metadata-item">
+                    <strong>Documento</strong>
+                    Justificación de Material
+                </div>
+                <div class="metadata-item">
+                    <strong>Fecha</strong>
+                    5 de Diciembre de 2025
+                </div>
+                <div class="metadata-item">
+                    <strong>Sección</strong>
+                    Mecánica Industrial
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="summary-box">
+                <h3 style="color: #2c3e50; margin-bottom: 25px; text-align: center; font-size: 1.3em;">📋 RESUMEN EJECUTIVO</h3>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                    <div class="summary-item">
+                        <span class="summary-item-label">ORDEN DE TRABAJO</span>
+                        <p class="summary-item-value">42499</p>
+                    </div>
+                    <div class="summary-item success">
+                        <span class="summary-item-label">ESTADO DEL MATERIAL NO UTILIZADO</span>
+                        <p class="summary-item-value">✓ BUENO</p>
+                    </div>
+                </div>
+
+                <div class="summary-item warning">
+                    <span class="summary-item-label">CANTIDAD EGRESADA DE MATERIAL</span>
+                    <p class="summary-item-value">2.000 metros de platina de 75 x 6 mm</p>
+                </div>
+
+                <div class="summary-item">
+                    <span class="summary-item-label">DESTINADO A</span>
+                    <p class="summary-item-value">Fabricación de 4.000 pletinas de unión y soporte de acero galvanizado de 75 x 6 mm y 420 mm de longitud</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>1. ANTECEDENTES</h2>
+                <p>
+                    En el año 2024 se realizó el egreso de <strong>2.000 metros de platina de 75 x 6 mm</strong>, destinadas a la fabricación de <strong>4.000 pletinas de unión y soporte de acero galvanizado de 75 x 6 mm y 420 mm de longitud</strong>.
+                </p>
+                <div class="highlight">
+                    <strong>⚠️ Situación Actual:</strong> Sin embargo, hasta la presente fecha, dicho material <strong>no ha sido utilizado</strong> 
+                    en los procesos productivos de la Sección Mecánica Industrial. Este informe justifica las razones de esta no utilización 
+                    y presenta las recomendaciones correspondientes.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>2. REVISIÓN DE INVENTARIOS EN BODEGAS</h2>
+                <p>
+                    Como parte del análisis técnico, se efectuó la <strong>verificación de existencias</strong> en las distintas bodegas 
+                    operativas de la Empresa, constatándose que el ítem mantiene <strong>niveles suficientes de stock</strong>.
+                </p>
+                <p>
+                    Durante el período 2024-2025, este material no ha presentado movimiento significativo.
+                </p>
+
+                <h3>📦 Distribución de Stock de Pletinas por Centro Operativo</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bodega / Centro Operativo</th>
+                            <th style="text-align: right;">Existencia (pletinas)</th>
+                            <th style="text-align: center;">% del Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Centro de Operaciones Turubamba (61)</td>
+                            <td style="text-align: right;">1.245</td>
+                            <td style="text-align: center;">20,4%</td>
+                        </tr>
+                        <tr>
+                            <td>Centro de Operaciones Calderón (64)</td>
+                            <td style="text-align: right;">700</td>
+                            <td style="text-align: center;">11,5%</td>
+                        </tr>
+                        <tr>
+                            <td>Red Aérea y Distribución (01)</td>
+                            <td style="text-align: right;">3.321</td>
+                            <td style="text-align: center;">54,4%</td>
+                        </tr>
+                        <tr>
+                            <td>Pérez Guerrero (06)</td>
+                            <td style="text-align: right;">428</td>
+                            <td style="text-align: center;">7,0%</td>
+                        </tr>
+                        <tr>
+                            <td>Centro de Operaciones Los Bancos (59)</td>
+                            <td style="text-align: right;">12</td>
+                            <td style="text-align: center;">0,2%</td>
+                        </tr>
+                        <tr>
+                            <td>Centro de Operaciones Gualo (46)</td>
+                            <td style="text-align: right;">354</td>
+                            <td style="text-align: center;">5,8%</td>
+                        </tr>
+                        <tr>
+                            <td>Centro de Operaciones Cumbayá (47)</td>
+                            <td style="text-align: right;">40</td>
+                            <td style="text-align: center;">0,7%</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td><strong>TOTAL STOCK</strong></td>
+                            <td style="text-align: right;"><strong>6.100</strong></td>
+                            <td style="text-align: center;"><strong>100%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight">
+                    <strong>📊 Análisis de Distribución:</strong>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Mayor concentración: Red Aérea y Distribución (54,4% del total - 3.321 pletinas)</li>
+                        <li>Distribución equilibrada en centros operativos principales</li>
+                        <li>Stock total de 6.100 pletinas suficiente para operaciones</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>3. ANÁLISIS TÉCNICO</h2>
+                <p>
+                    A pesar de haberse egresado el material en 2024, la producción no se ejecutó debido a que 
+                    <strong>el stock existente en bodegas era suficiente</strong> para cubrir las necesidades operativas.
+                </p>
+
+                <h3>🔍 Hallazgos Principales:</h3>
+                <ul class="checklist">
+                    <li>El material se encuentra físicamente en los patios de la Sección Mecánica Industrial</li>
+                    <li>Estado de conservación: <strong>Bueno</strong> (sin deterioro)</li>
+                    <li>Custodia: Bajo responsabilidad de la Sección Mecánica Industrial</li>
+                    <li>Rotación: <strong>Baja durante 2024-2025</strong></li>
+                    <li>Causa raíz: Suficiencia de inventario existente en bodegas</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>4. CONCLUSIONES</h2>
+                <ul class="checklist">
+                    <li>El material egresado no se utilizó debido a la <strong>suficiencia del stock existente</strong> en bodegas</li>
+                    <li>La <strong>rotación del ítem ha sido baja</strong> en los centros operativos durante el período de análisis</li>
+                    <li>Las <strong>existencias totales suman 6.100 pletinas</strong> distribuidos estratégicamente</li>
+                    <li>Las pletinas se mantienen <strong>físicamente bajo custodia</strong> en buen estado</li>
+                    <li>No se ha identificado <strong>deterioro o pérdida</strong> del material egresado</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>5. RECOMENDACIONES Y EJECUCIÓN</h2>
+                
+                <h3>📌 Acciones Inmediatas:</h3>
+                <div class="recommendation">
+                    <strong>1. Realizar el reingreso</strong> de los 2.000 metros de platina al sistema de bodegas para regularización contable
+                </div>
+                <div class="recommendation">
+                    <strong>2. Mantener control continuo</strong> del movimiento del ítem mediante auditorías periódicas
+                </div>
+                <div class="recommendation">
+                    <strong>3. Coordinar con los grupos operativos</strong> la actualización periódica de necesidades reales de material
+                </div>
+                <div class="recommendation">
+                    <strong>4. Ajustar la planificación de fabricación</strong> con base en los niveles de stock existentes
+                </div>
+
+                <h3>📋 Seguimiento:</h3>
+                <ul class="checklist">
+                    <li>Revisar inventarios mensualmente</li>
+                    <li>Ajustar proyecciones de compra según demanda real</li>
+                    <li>Optimizar distribución de stock entre centros operativos</li>
+                    <li>Implementar sistema de alertas para rotación baja de materiales</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>6. OBSERVACIONES FINALES</h2>
+                <div class="highlight">
+                    <p>
+                        Este informe justifica la no utilización del material egresado en 2024, atribuyendo esta circunstancia a la 
+                        <strong>suficiencia del inventario existente</strong> en bodegas. Se recomienda proceder con el reingreso administrativo 
+                        del material y fortalecer los procesos de planificación para evitar egresos innecesarios en futuras operaciones.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Elaborado por:</strong> Sección Mecánica Industrial</p>
+            <p><strong>Revisión:</strong> Control de Inventarios</p>
+            <p><strong>Fecha de Emisión:</strong> 5 de Diciembre de 2025</p>
+            <p style="margin-top: 15px; opacity: 0.7;">© 2025 - Informe Técnico de Justificación de Material | O/T 42499 | By José David Coral</p>
+        </div>
+    </div>
+
+    <script>
+        function descargarHTML() {
+            const contenido = document.documentElement.outerHTML;
+            const blob = new Blob([contenido], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Informe_Justificacion_Material_O-T_42499.html';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function descargarWord() {
+            const contenidoWord = `
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Informe Justificación Material O/T 42499</title>
+    <style>
+        body { font-family: 'Calibri', Arial, sans-serif; margin: 2cm; line-height: 1.6; }
+        h1 { font-size: 24pt; color: #2c3e50; text-align: center; margin: 20px 0; }
+        h2 { font-size: 16pt; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin: 20px 0 10px 0; }
+        h3 { font-size: 13pt; color: #34495e; margin: 15px 0 10px 0; }
+        p { text-align: justify; margin: 10px 0; }
+        .summary { background-color: #e8f4f8; padding: 20px; margin: 15px 0; border-left: 4px solid #3498db; }
+        .summary-item { margin: 10px 0; }
+        .summary-label { font-weight: bold; color: #2c3e50; }
+        .highlight { background-color: #e8f4f8; border-left: 4px solid #3498db; padding: 15px; margin: 15px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #bdc3c7; padding: 10px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        tr:nth-child(even) { background-color: #ecf0f1; }
+        .total-row { background-color: #d4e8f0; font-weight: bold; }
+        ul { margin: 15px 0; padding-left: 40px; }
+        li { margin: 8px 0; }
+        .recommendation { background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 10px 0; }
+        .footer { border-top: 2px solid #3498db; padding-top: 15px; margin-top: 30px; font-size: 11pt; color: #666; }
+    </style>
+</head>
+<body>
+    <h1>INFORME DE JUSTIFICACIÓN</h1>
+    <p style="text-align: center; font-size: 14pt;">No Utilización del Material Egresado en 2024</p>
+    <p style="text-align: center; font-size: 14pt;"><strong>Referencia O/T: 42499</strong></p>
+    
+    <div class="summary">
+        <h3>RESUMEN EJECUTIVO</h3>
+        <div class="summary-item">
+            <span class="summary-label">ORDEN DE TRABAJO:</span> 42499
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">CANTIDAD EGRESADA DE MATERIAL:</span> 2.000 metros de platina de 75 x 6 mm
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">DESTINADO A:</span> Fabricación de 4.000 pletinas de unión y soporte de acero galvanizado de 75 x 6 mm y 420 mm de longitud
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">ESTADO DEL MATERIAL NO UTILIZADO:</span> <strong style="color: #27ae60;">BUENO</strong>
+        </div>
+    </div>
+
+    <h2>1. ANTECEDENTES</h2>
+    <p>En el año 2024 se realizó el egreso de <strong>2.000 metros de platina de 75 x 6 mm</strong>, destinadas a la fabricación de <strong>4.000 pletinas de unión y soporte de acero galvanizado de 75 x 6 mm y 420 mm de longitud</strong>.</p>
+    <div class="highlight">
+        <strong>⚠️ Situación Actual:</strong> Sin embargo, hasta la presente fecha, dicho material <strong>no ha sido utilizado</strong> en los procesos productivos de la Sección Mecánica Industrial. Este informe justifica las razones de esta no utilización y presenta las recomendaciones correspondientes.
+    </div>
+
+    <h2>2. REVISIÓN DE INVENTARIOS EN BODEGAS</h2>
+    <p>Como parte del análisis técnico, se efectuó la <strong>verificación de existencias</strong> en las distintas bodegas operativas de la Empresa, constatándose que el ítem mantiene <strong>niveles suficientes de stock</strong>.</p>
+    <p>Durante el período 2024-2025, este material no ha presentado movimiento significativo.</p>
+
+    <h3>Distribución de Stock por Centro Operativo</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Bodega / Centro Operativo</th>
+                <th>Existencia (pletinas)</th>
+                <th>% del Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Centro de Operaciones Turubamba (61)</td>
+                <td>1.245</td>
+                <td>20,4%</td>
+            </tr>
+            <tr>
+                <td>Centro de Operaciones Calderón (64)</td>
+                <td>700</td>
+                <td>11,5%</td>
+            </tr>
+            <tr>
+                <td>Red Aérea y Distribución (01)</td>
+                <td>3.321</td>
+                <td>54,4%</td>
+            </tr>
+            <tr>
+                <td>Pérez Guerrero (06)</td>
+                <td>428</td>
+                <td>7,0%</td>
+            </tr>
+            <tr>
+                <td>Centro de Operaciones Los Bancos (59)</td>
+                <td>12</td>
+                <td>0,2%</td>
+            </tr>
+            <tr>
+                <td>Centro de Operaciones Gualo (46)</td>
+                <td>354</td>
+                <td>5,8%</td>
+            </tr>
+            <tr>
+                <td>Centro de Operaciones Cumbayá (47)</td>
+                <td>40</td>
+                <td>0,7%</td>
+            </tr>
+            <tr class="total-row">
+                <td><strong>TOTAL STOCK</strong></td>
+                <td><strong>6.100</strong></td>
+                <td><strong>100%</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>3. ANÁLISIS TÉCNICO</h2>
+    <p>A pesar de haberse egresado el material en 2024, la producción no se ejecutó debido a que <strong>el stock existente en bodegas era suficiente</strong> para cubrir las necesidades operativas.</p>
+    
+    <h3>Hallazgos Principales:</h3>
+    <ul>
+        <li>El material se encuentra físicamente en los patios de la Sección Mecánica Industrial</li>
+        <li>Estado de conservación: <strong>Bueno</strong> (sin deterioro)</li>
+        <li>Custodia: Bajo responsabilidad de la Sección Mecánica Industrial</li>
+        <li>Rotación: <strong>Baja durante 2024-2025</strong></li>
+        <li>Causa raíz: Suficiencia de inventario existente en bodegas</li>
+    </ul>
+
+    <h2>4. CONCLUSIONES</h2>
+    <ul>
+        <li>El material egresado no se utilizó debido a la <strong>suficiencia del stock existente</strong> en bodegas</li>
+        <li>La <strong>rotación del ítem ha sido baja</strong> en los centros operativos durante el período de análisis</li>
+        <li>Las <strong>existencias totales suman 6.100 pletinas</strong> distribuidos estratégicamente</li>
+        <li>Las pletinas se mantienen <strong>físicamente bajo custodia</strong> en buen estado</li>
+        <li>No se ha identificado <strong>deterioro o pérdida</strong> del material egresado</li>
+    </ul>
+
+    <h2>5. RECOMENDACIONES Y EJECUCIÓN</h2>
+    
+    <h3>Acciones Inmediatas:</h3>
+    <div class="recommendation">
+        <strong>1. Realizar el reingreso</strong> de los 2.000 metros de platina al sistema de bodegas para regularización contable
+    </div>
+    <div class="recommendation">
+        <strong>2. Mantener control continuo</strong> del movimiento del ítem mediante auditorías periódicas
+    </div>
+    <div class="recommendation">
+        <strong>3. Coordinar con los grupos operativos</strong> la actualización periódica de necesidades reales de material
+    </div>
+    <div class="recommendation">
+        <strong>4. Ajustar la planificación de fabricación</strong> con base en los niveles de stock existentes
+    </div>
+
+    <h3>Seguimiento:</h3>
+    <ul>
+        <li>Revisar inventarios mensualmente</li>
+        <li>Ajustar proyecciones de compra según demanda real</li>
+        <li>Optimizar distribución de stock entre centros operativos</li>
+        <li>Implementar sistema de alertas para rotación baja de materiales</li>
+    </ul>
+
+    <h2>6. OBSERVACIONES FINALES</h2>
+    <div class="highlight">
+        <p>Este informe justifica la no utilización del material egresado en 2024, atribuyendo esta circunstancia a la <strong>suficiencia del inventario existente</strong> en bodegas. Se recomienda proceder con el reingreso administrativo del material y fortalecer los procesos de planificación para evitar egresos innecesarios en futuras operaciones.</p>
+    </div>
+
+    <div class="footer">
+        <p><strong>Elaborado por:</strong> Sección Mecánica Industrial</p>
+        <p><strong>Revisión:</strong> Control de Inventarios</p>
+        <p><strong>Fecha de Emisión:</strong> 5 de Diciembre de 2025</p>
+        <p>© 2025 - Informe Técnico de Justificación de Material | O/T 42499 | By José David Coral</p>
+    </div>
+</body>
+</html>
+            `;
+            
+            const blob = new Blob([contenidoWord], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Informe_Justificacion_Material_O-T_42499.doc';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
